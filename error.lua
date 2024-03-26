@@ -49,17 +49,32 @@ do -- 32
 			else -- 47
 				return tostring(self.name) .. ": " .. tostring(self.message) -- 47
 			end -- 44
+		end, -- 49
+		display = function(self) -- 49
+			if isstring(self) then -- 50
+				return ErrorNoHaltWithStack(self) -- 51
+			end -- 50
+			local lines = { } -- 53
+			lines[#lines + 1] = "\n[ERROR] " .. tostring(self) -- 54
+			for i, info in ipairs(self.stack) do -- 55
+				lines[#lines + 1] = tostring(string.rep(" ", i)) .. " " .. tostring(i) .. ". " .. tostring(info.name or "unknown") .. " - " .. tostring(info.short_src) .. ":" .. tostring(info.currentline) -- 56
+			end -- 56
+			lines[#lines + 1] = "\n" -- 57
+			return ErrorNoHalt(table.concat(lines, "\n")) -- 58
 		end -- 32
 	} -- 32
 	if _base_0.__index == nil then -- 32
 		_base_0.__index = _base_0 -- 32
-	end -- 47
+	end -- 58
 	_class_0 = setmetatable({ -- 32
-		__init = function(self, message, fileName, lineNumber) -- 37
+		__init = function(self, message, fileName, lineNumber, stackPos) -- 37
+			if stackPos == nil then -- 37
+				stackPos = 4 -- 37
+			end -- 37
 			self.message = message -- 37
 			self.fileName = fileName -- 37
 			self.lineNumber = lineNumber -- 37
-			self.stack = capture_stack(4) -- 38
+			self.stack = capture_stack(stackPos) -- 38
 			if self.stack[1] then -- 39
 				self.fileName = self.fileName or self.stack[1].short_src -- 40
 				self.lineNumber = self.lineNumber or self.stack[1].currentline -- 41
@@ -81,52 +96,96 @@ do -- 32
 		child.__base.name = child.__name or self.name -- 35
 	end -- 34
 	Error = _class_0 -- 32
-end -- 47
+end -- 58
 _module_0["Error"] = Error -- 32
-local TypeError -- 49
-do -- 49
-	local _class_0 -- 49
-	local _parent_0 = Error -- 49
-	local _base_0 = { } -- 49
-	for _key_0, _val_0 in pairs(_parent_0.__base) do -- 49
-		if _base_0[_key_0] == nil and _key_0:match("^__") and not (_key_0 == "__index" and _val_0 == _parent_0.__base) then -- 49
-			_base_0[_key_0] = _val_0 -- 49
-		end -- 49
-	end -- 49
-	if _base_0.__index == nil then -- 49
-		_base_0.__index = _base_0 -- 49
-	end -- 49
-	setmetatable(_base_0, _parent_0.__base) -- 49
-	_class_0 = setmetatable({ -- 49
-		__init = function(self, ...) -- 49
-			return _class_0.__parent.__init(self, ...) -- 49
-		end, -- 49
-		__base = _base_0, -- 49
-		__name = "TypeError", -- 49
-		__parent = _parent_0 -- 49
-	}, { -- 49
-		__index = function(cls, name) -- 49
-			local val = rawget(_base_0, name) -- 49
-			if val == nil then -- 49
-				local parent = rawget(cls, "__parent") -- 49
-				if parent then -- 49
-					return parent[name] -- 49
-				end -- 49
-			else -- 49
-				return val -- 49
-			end -- 49
-		end, -- 49
-		__call = function(cls, ...) -- 49
-			local _self_0 = setmetatable({ }, _base_0) -- 49
-			cls.__init(_self_0, ...) -- 49
-			return _self_0 -- 49
-		end -- 49
-	}) -- 49
-	_base_0.__class = _class_0 -- 49
-	if _parent_0.__inherited then -- 49
-		_parent_0.__inherited(_parent_0, _class_0) -- 49
-	end -- 49
-	TypeError = _class_0 -- 49
-end -- 49
-_module_0["TypeError"] = TypeError -- 49
-return _module_0 -- 49
+local TypeError -- 60
+do -- 60
+	local _class_0 -- 60
+	local _parent_0 = Error -- 60
+	local _base_0 = { } -- 60
+	for _key_0, _val_0 in pairs(_parent_0.__base) do -- 60
+		if _base_0[_key_0] == nil and _key_0:match("^__") and not (_key_0 == "__index" and _val_0 == _parent_0.__base) then -- 60
+			_base_0[_key_0] = _val_0 -- 60
+		end -- 60
+	end -- 60
+	if _base_0.__index == nil then -- 60
+		_base_0.__index = _base_0 -- 60
+	end -- 60
+	setmetatable(_base_0, _parent_0.__base) -- 60
+	_class_0 = setmetatable({ -- 60
+		__init = function(self, ...) -- 60
+			return _class_0.__parent.__init(self, ...) -- 60
+		end, -- 60
+		__base = _base_0, -- 60
+		__name = "TypeError", -- 60
+		__parent = _parent_0 -- 60
+	}, { -- 60
+		__index = function(cls, name) -- 60
+			local val = rawget(_base_0, name) -- 60
+			if val == nil then -- 60
+				local parent = rawget(cls, "__parent") -- 60
+				if parent then -- 60
+					return parent[name] -- 60
+				end -- 60
+			else -- 60
+				return val -- 60
+			end -- 60
+		end, -- 60
+		__call = function(cls, ...) -- 60
+			local _self_0 = setmetatable({ }, _base_0) -- 60
+			cls.__init(_self_0, ...) -- 60
+			return _self_0 -- 60
+		end -- 60
+	}) -- 60
+	_base_0.__class = _class_0 -- 60
+	if _parent_0.__inherited then -- 60
+		_parent_0.__inherited(_parent_0, _class_0) -- 60
+	end -- 60
+	TypeError = _class_0 -- 60
+end -- 60
+_module_0["TypeError"] = TypeError -- 60
+local RuntimeError -- 61
+local _class_0 -- 61
+local _parent_0 = Error -- 61
+local _base_0 = { } -- 61
+for _key_0, _val_0 in pairs(_parent_0.__base) do -- 61
+	if _base_0[_key_0] == nil and _key_0:match("^__") and not (_key_0 == "__index" and _val_0 == _parent_0.__base) then -- 61
+		_base_0[_key_0] = _val_0 -- 61
+	end -- 61
+end -- 61
+if _base_0.__index == nil then -- 61
+	_base_0.__index = _base_0 -- 61
+end -- 61
+setmetatable(_base_0, _parent_0.__base) -- 61
+_class_0 = setmetatable({ -- 61
+	__init = function(self, ...) -- 61
+		return _class_0.__parent.__init(self, ...) -- 61
+	end, -- 61
+	__base = _base_0, -- 61
+	__name = "RuntimeError", -- 61
+	__parent = _parent_0 -- 61
+}, { -- 61
+	__index = function(cls, name) -- 61
+		local val = rawget(_base_0, name) -- 61
+		if val == nil then -- 61
+			local parent = rawget(cls, "__parent") -- 61
+			if parent then -- 61
+				return parent[name] -- 61
+			end -- 61
+		else -- 61
+			return val -- 61
+		end -- 61
+	end, -- 61
+	__call = function(cls, ...) -- 61
+		local _self_0 = setmetatable({ }, _base_0) -- 61
+		cls.__init(_self_0, ...) -- 61
+		return _self_0 -- 61
+	end -- 61
+}) -- 61
+_base_0.__class = _class_0 -- 61
+if _parent_0.__inherited then -- 61
+	_parent_0.__inherited(_parent_0, _class_0) -- 61
+end -- 61
+RuntimeError = _class_0 -- 61
+_module_0["RuntimeError"] = RuntimeError -- 61
+return _module_0 -- 61
