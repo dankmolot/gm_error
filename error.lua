@@ -145,47 +145,93 @@ do -- 60
 end -- 60
 _module_0["TypeError"] = TypeError -- 60
 local RuntimeError -- 61
-local _class_0 -- 61
-local _parent_0 = Error -- 61
-local _base_0 = { } -- 61
-for _key_0, _val_0 in pairs(_parent_0.__base) do -- 61
-	if _base_0[_key_0] == nil and _key_0:match("^__") and not (_key_0 == "__index" and _val_0 == _parent_0.__base) then -- 61
-		_base_0[_key_0] = _val_0 -- 61
-	end -- 61
-end -- 61
-if _base_0.__index == nil then -- 61
-	_base_0.__index = _base_0 -- 61
-end -- 61
-setmetatable(_base_0, _parent_0.__base) -- 61
-_class_0 = setmetatable({ -- 61
-	__init = function(self, ...) -- 61
-		return _class_0.__parent.__init(self, ...) -- 61
-	end, -- 61
-	__base = _base_0, -- 61
-	__name = "RuntimeError", -- 61
-	__parent = _parent_0 -- 61
-}, { -- 61
-	__index = function(cls, name) -- 61
-		local val = rawget(_base_0, name) -- 61
-		if val == nil then -- 61
-			local parent = rawget(cls, "__parent") -- 61
-			if parent then -- 61
-				return parent[name] -- 61
-			end -- 61
-		else -- 61
-			return val -- 61
+do -- 61
+	local _class_0 -- 61
+	local _parent_0 = Error -- 61
+	local _base_0 = { } -- 61
+	for _key_0, _val_0 in pairs(_parent_0.__base) do -- 61
+		if _base_0[_key_0] == nil and _key_0:match("^__") and not (_key_0 == "__index" and _val_0 == _parent_0.__base) then -- 61
+			_base_0[_key_0] = _val_0 -- 61
 		end -- 61
-	end, -- 61
-	__call = function(cls, ...) -- 61
-		local _self_0 = setmetatable({ }, _base_0) -- 61
-		cls.__init(_self_0, ...) -- 61
-		return _self_0 -- 61
 	end -- 61
-}) -- 61
-_base_0.__class = _class_0 -- 61
-if _parent_0.__inherited then -- 61
-	_parent_0.__inherited(_parent_0, _class_0) -- 61
+	if _base_0.__index == nil then -- 61
+		_base_0.__index = _base_0 -- 61
+	end -- 61
+	setmetatable(_base_0, _parent_0.__base) -- 61
+	_class_0 = setmetatable({ -- 61
+		__init = function(self, ...) -- 61
+			return _class_0.__parent.__init(self, ...) -- 61
+		end, -- 61
+		__base = _base_0, -- 61
+		__name = "RuntimeError", -- 61
+		__parent = _parent_0 -- 61
+	}, { -- 61
+		__index = function(cls, name) -- 61
+			local val = rawget(_base_0, name) -- 61
+			if val == nil then -- 61
+				local parent = rawget(cls, "__parent") -- 61
+				if parent then -- 61
+					return parent[name] -- 61
+				end -- 61
+			else -- 61
+				return val -- 61
+			end -- 61
+		end, -- 61
+		__call = function(cls, ...) -- 61
+			local _self_0 = setmetatable({ }, _base_0) -- 61
+			cls.__init(_self_0, ...) -- 61
+			return _self_0 -- 61
+		end -- 61
+	}) -- 61
+	_base_0.__class = _class_0 -- 61
+	if _parent_0.__inherited then -- 61
+		_parent_0.__inherited(_parent_0, _class_0) -- 61
+	end -- 61
+	RuntimeError = _class_0 -- 61
 end -- 61
-RuntimeError = _class_0 -- 61
 _module_0["RuntimeError"] = RuntimeError -- 61
-return _module_0 -- 61
+local RangeError -- 62
+local _class_0 -- 62
+local _parent_0 = Error -- 62
+local _base_0 = { } -- 62
+for _key_0, _val_0 in pairs(_parent_0.__base) do -- 62
+	if _base_0[_key_0] == nil and _key_0:match("^__") and not (_key_0 == "__index" and _val_0 == _parent_0.__base) then -- 62
+		_base_0[_key_0] = _val_0 -- 62
+	end -- 62
+end -- 62
+if _base_0.__index == nil then -- 62
+	_base_0.__index = _base_0 -- 62
+end -- 62
+setmetatable(_base_0, _parent_0.__base) -- 62
+_class_0 = setmetatable({ -- 62
+	__init = function(self, ...) -- 62
+		return _class_0.__parent.__init(self, ...) -- 62
+	end, -- 62
+	__base = _base_0, -- 62
+	__name = "RangeError", -- 62
+	__parent = _parent_0 -- 62
+}, { -- 62
+	__index = function(cls, name) -- 62
+		local val = rawget(_base_0, name) -- 62
+		if val == nil then -- 62
+			local parent = rawget(cls, "__parent") -- 62
+			if parent then -- 62
+				return parent[name] -- 62
+			end -- 62
+		else -- 62
+			return val -- 62
+		end -- 62
+	end, -- 62
+	__call = function(cls, ...) -- 62
+		local _self_0 = setmetatable({ }, _base_0) -- 62
+		cls.__init(_self_0, ...) -- 62
+		return _self_0 -- 62
+	end -- 62
+}) -- 62
+_base_0.__class = _class_0 -- 62
+if _parent_0.__inherited then -- 62
+	_parent_0.__inherited(_parent_0, _class_0) -- 62
+end -- 62
+RangeError = _class_0 -- 62
+_module_0["RangeError"] = RangeError -- 62
+return _module_0 -- 62
