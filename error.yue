@@ -21,7 +21,9 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
 ]]
-import isstring, tostring, ErrorNoHaltWithStack, ErrorNoHalt, getmetatable from _G
+import environment from _G.gpm
+import isstring, tostring, ErrorNoHaltWithStack, ErrorNoHalt, getmetatable from gpm.environment
+import getstack from environment.debug
 import format, rep from string
 import concat from table
 
@@ -61,18 +63,7 @@ export class Error
         ErrorNoHalt concat( lines, "\n", 1, length )
         return
 
-    @captureStack: ( stackPos = 1 ) ->
-        stack, length = {}, 0
-
-        for level = 1 + ( stackPos or 1 ), 16
-            info = getinfo( level, "Snl" )
-            unless info
-                break
-
-            length += 1
-            stack[ length ] = info
-
-        return stack, length
+    @captureStack: ( stackPos = 1 ) -> gpm.debug.getstack( stackPos )
 
     @is: ( obj, name = "Error" ) ->
         meta = getmetatable( obj )
@@ -86,6 +77,13 @@ export class Error
 export iserror = Error.is
 
 export class NotImplementedError extends Error
+export class CodeCompileError extends Error
+export class FileSystemError extends Error
+export class WebClientError extends Error
 export class RuntimeError extends Error
+export class PackageError extends Error
+export class ModuleError extends Error
+export class SourceError extends Error
+export class AddonError extends Error
 export class RangeError extends Error
 export class TypeError extends Error
