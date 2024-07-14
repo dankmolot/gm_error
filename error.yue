@@ -82,6 +82,7 @@ export class FileSystemError extends Error
 export class WebClientError extends Error
 export class RuntimeError extends Error
 export class PackageError extends Error
+export class PromiseError extends Error
 export class ModuleError extends Error
 export class SourceError extends Error
 export class AddonError extends Error
